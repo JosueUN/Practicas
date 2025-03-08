@@ -1,0 +1,103 @@
+@startuml
+class Jugador
+class Buscaminas
+{
+    - Tablero : tableros
+    - DificultadDeJuego : principiante
+    - DificultadDeJuego : intermedio
+    - DificultadDeJuego : experto
+    - DificultadDeJuego : otros
+
+    + Comenzar()
+    + Descubrir(Celdas)
+    + Colocar (banderas)
+    + Ganar ()
+
+}
+class Celda { 
+   -Numero: numerosNaturales
+            }
+class CeldaAbierta
+class CeldaCerrada
+class CeldaConMina
+class CeldaSegura
+class Tablero {
+ - Boton : botonReset
+ - Boton : celda 
+ - Contador : relojTiempo
+ - Mina : mina
+            }
+class Mina {
+       +Explotar()
+       +Perder()
+           }
+class Explosion
+class Numero{
+    -Color : colorAzul
+    -Color : colorVerde
+    -Color : colorRojo
+                 } 
+class Color
+class Bandera { 
+   -Bandera : colorRojo
+              }
+class Boton 
+class BotonReset
+class CaraFeliz {
+  - Color : colorAmarillo
+                }
+class Contador
+class RelojTiempo
+class ContadorDeMina
+class DificultadDeJuego
+{ 
+    +  Seleccionar (DificultadDeJuego)
+    + Comenzar (Buscaminas)
+}
+class Principiante
+class Intermedio
+class Experto
+class ColorRojo
+class ColorVerde
+class ColorAzul
+class ColorAmarillo
+
+ColorAzul --|> Color 
+ColorVerde --|> Color 
+ColorRojo --|> Color
+ColorAmarillo --|> Color 
+
+Jugador  o--  Buscaminas
+Buscaminas "1" *-- "3" DificultadDeJuego
+Buscaminas "1" *-- "1" Tablero
+
+DificultadDeJuego <|-- Principiante
+DificultadDeJuego <|-- Intermedio
+DificultadDeJuego <|-- Experto
+
+Tablero "1" *-- "2" Contador
+Contador <|-- RelojTiempo
+Contador <|-- ContadorDeMina
+
+Celda <|-- CeldaAbierta
+Celda <|-- CeldaCerrada
+Celda <|-- CeldaSegura
+Celda <|-- CeldaConMina
+
+Boton <|-- Celda 
+Tablero "1" *-- "82, 256, 481" Boton
+Boton <|-- BotonReset
+BotonReset <|-- CaraFeliz 
+CaraFeliz "1" *-- "1" Color
+Numero "1" *-- "1" Color
+Celda "1" *-- "0, 1" Numero 
+
+Bandera "1" *-- "1" Color
+CeldaConMina <|-- Bandera
+
+Tablero "1" *-- "10, 49, 99" Mina
+Explosion <|-- Mina
+Explosion o-- Mina
+
+Jugador  o--  DificultadDeJuego
+@enduml
