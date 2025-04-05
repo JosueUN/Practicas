@@ -5,6 +5,12 @@ class Chorizo{
 private:
     bool size;
     bool encendido;
+public:
+    void Inicializar(){
+        size = 1;
+        encendido = true;
+        otro = true;
+    }
 };
 int main(int argc, char const *argv[])
 {
@@ -13,7 +19,8 @@ int main(int argc, char const *argv[])
     cout <<"Tamaño float: "<<sizeof(float)<<endl;
     cout <<"Tamaño char: "<<sizeof(char)<<endl;
     cout <<"Tamaño bool: "<<sizeof(bool)<<endl;
-    cout <<"Tamaño double: "<<sizeof(double)<<endl<<endl;
+    cout <<"Tamaño double: "<<sizeof(double)<<endl;
+    cout <<"Tamaño void: "<<sizeof(void)<<endl;
 
 
     int a=27, b=50;
@@ -33,6 +40,7 @@ int main(int argc, char const *argv[])
     cout<< "Tamaño puntero: "<<sizeof (bool*)<<endl;
     cout<< "Direccion (&) de direccionA: "<<&direccionA<<endl;
     cout<< "Indireccion (*) de direccionA: "<<*direccionA<<endl;
+    cout <<"-----------------------------------------------------------------------------"<<endl<<endl;
 
     cout <<"-----------------------------------------------------------------------------"<<endl;
     cout<< "Arreglos: "<<endl;
@@ -42,12 +50,37 @@ int main(int argc, char const *argv[])
     cout<<"Direccion de arreglo [1]: "<<&arreglo[1]<<endl;
     cout<<"Direccion de arreglo + 0: "<<&arreglo + 0<<endl;
     cout<<"Direccion de arreglo + 1: "<<&arreglo + 1<<endl;
+    cout <<"-----------------------------------------------------------------------------"<<endl<<endl;
+
 
     cout <<"-----------------------------------------------------------------------------"<<endl;
     cout<<"Objetos"<<endl;
     Chorizo pruebas;
     cout<<"Tamaño Chorizo: "<<sizeof(Chorizo)<<endl;
     cout<<"Tamaño Chorizo: "<<&pruebas<<endl;
+    cout <<"-----------------------------------------------------------------------------"<<endl<<endl;
+
+    cout <<"-----------------------------------------------------------------------------"<<endl;
+    cout<<"Memoria dinamica"<<endl;
+    cout<<"Malloc: "<<malloc (sizeof (int))<<endl;
+    //guardar direccion en un puntero
+    void* memoriaDinamica = malloc ((sizeof(int)));
+
+    cout <<"-----------------------------------------------------------------------------"<<endl<<endl;
+    cout <<"Cast variables"<<endl;
+    int* punteroEntero = (int*) malloc(sizeof(int));
+    *punteroEntero = 5;
+    cout<<"Direccion: "<<punteroEntero<<endl;
+    cout<<"Valor: "<<*punteroEntero<<endl;
+    //Liberar memoria
+    free(punteroEntero);
+    cout <<"-----------------------------------------------------------------------------"<<endl<<endl;
+
+    cout <<"-----------------------------------------------------------------------------"<<endl;
+    cout<<"Memoria dinamica en c++ (oibjetos)"<<endl;
+    cout<<"C++: "<<new Chorizo()<<endl;
+    Chorizo* punteroCpp = new Chorizo();
+    delete punteroCpp;
 
     return 0;
 }   
