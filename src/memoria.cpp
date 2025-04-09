@@ -12,6 +12,7 @@ public:
         otro = true;
     }
 };
+
 int main(int argc, char const *argv[])
 {
     cout<<"Tamaño de memoria"<<endl;
@@ -81,6 +82,14 @@ int main(int argc, char const *argv[])
     cout<<"C++: "<<new Chorizo()<<endl;
     Chorizo* punteroCpp = new Chorizo();
     delete punteroCpp;
+
+    // Indireccion vs operador ->
+    // Indireccion
+    (*punteroCpp).Inicializar();
+    // operador ->
+    punteroCpp ->Inicializar();
+
+
 
     return 0;
 }   
