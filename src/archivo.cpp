@@ -5,7 +5,6 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    ifstream archivoEntrada;
     ofstream archivoSalida;
 
     //abrir eñ archivo de salida
@@ -17,9 +16,20 @@ int main(int argc, char const *argv[])
     // Escribir en el archivo de salida
     archivoSalida << "Hola, este es un archivo de salida. "<<endl;
 
-
-    
     archivoSalida.close();
+
+    ifstream archivoEntrada;
+    string linea;
+    archivoEntrada.open ("archivo_Entrada.txt");
+    if (!archivoEntrada){
+        cerr<<"Error al abrir eñ archivo de entrada."<<endl;
+        return 1;
+    }
+
+    while(getline(archivoEntrada, linea)){
+        cout<<linea<<endl;
+    }
+    archivoEntrada.close();
 
     return 0;
 }
