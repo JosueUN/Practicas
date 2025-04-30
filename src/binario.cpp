@@ -25,18 +25,22 @@ int main(int argc, char const *argv[])
     archivoSalida.write((const char*)(&p2), sizeof(Persona));
     archivoSalida.close();
 
-   /* ifstream archivoEntrada;
-    string linea;
-    archivoEntrada.open ("archivo_Entrada.bin");
+
+//---------------------------------------------------------------------------------------------------------
+    ifstream archivoEntrada;
+    Persona p;
+    // Abrir el archivo de entrada
+
+    archivoEntrada.open ("archivo_salida.bin", ios::binary);
     if (!archivoEntrada){
-        cerr<<"Error al abrir eñ archivo de entrada."<<endl;
+        cerr<<"Error al abrir el archivo de entrada."<<endl;
         return 1;
     }
 
-    while(getline(archivoEntrada, linea)){
-        cout<<linea<<endl;
+    while(archivoEntrada.read((char*)(&p), sizeof(Persona))){
+        cout<<"Nombre:  "<<p.nombre << ", Edad: " <<p.edad <<endl;
     }
     archivoEntrada.close();
 
-    return 0;*/
+    return 0;
 }
