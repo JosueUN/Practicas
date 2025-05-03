@@ -42,5 +42,9 @@ int main(int argc, char const *argv[])
     }
     archivoEntrada.close();
 
+    
+
+
+
     return 0;
 }
