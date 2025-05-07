@@ -4,23 +4,37 @@
 #include <fstream>
 #include <sstream>
 #include <list>
+#include <set>
+
 
 using namespace std;
 
+enum Columnas{
+    INDICE,
+    NOMBRE,
+    NUMERO,
+    TIPO,
+    ETAPA,
+    ANTECESOR,
+    ANTECESOR_NO
+
+};
 enum TipoPokemon {
     FUEGO,
     AGUA,
     PLANTA,
-    ELECTRICIDAD
+    ELECTRICIDAD,
+    VENENO
+
 };
 
 class Pokemon {
 private:
     string nombre;
-    list <TipoPokemon> tipos;
+    set <TipoPokemon> tipos;
     int nivel;
 public:
-    Pokemon(string nombre, TipoPokemon tipos, int nivel) {
+    Pokemon(string nombre, set< TipoPokemon> tipos, int nivel) {
         this->nombre = nombre;
         this->tipos = tipos;
         this->nivel = nivel;
@@ -51,10 +65,8 @@ int main(int argc, char const *argv[]) {
     vEnteros.push_back(1);
     vEnteros.push_back(0);
 
-    // vector de objetos Pokemon
-    vector<Pokemon> pokedex;
-    pokedex.push_back(Pokemon("Bulbasaur", PLANTA, 1));
     
+      
 
     fstream pokeCSV ("assets/pokedex.csv");
     if (!pokeCSV){
@@ -63,21 +75,40 @@ int main(int argc, char const *argv[]) {
     }
 
     string linea;
+    // vector de objetos Pokemon
+    vector<Pokemon> pokedex;
+    pokedex.push_back(Pokemon("Misingno",{TipoPokemon::VENENO},999));
     while (getline(pokeCSV, linea))
     {
+        //convertir a un string de cadena
         stringstream ss(linea);
+        //Extraer un valor y guardar en la lista
         string valor;
-        vector <string>fila;
+        //crear lista temporal para las columnas
+        vector <string>listaColumnas;
         while(getline(ss, valor, ',')){
-            fila.push_back(valor);
+            listaColumnas.push_back(valor);
         }
-        //crear el pokemon
-        Pokemon p(fila.at(1), TipoPokemon::AGUA,1);
-       // agregar el pokemon al pokedex
-       pokedex.push_back(p);
+
+        try
+        {
+          //crear el pokemon
+            Pokemon p(listaColumnas.at(Columnas::NOMBRE), 
+            {TipoPokemon::AGUA},
+            stoi(listaColumnas.at(Columnas::ETAPA))
+            );
+            // agregar el pokemon al pokedex
+            pokedex.push_back(p); 
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+        
+        
     }
     cout <<"Pokemon cargados al pokedex = " << pokedex.size()<<endl;
-    
+    cout<<"EL pokemon 5 es "<<pokedex.at(5).GetNombre()<<endl;
 
     return EXIT_SUCCESS;
 }
